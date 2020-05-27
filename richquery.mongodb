@@ -1,0 +1,47 @@
+use('RICH-QUERY');
+
+db.customers.find (
+{
+  gender: 'Female',
+  dob: {
+   $gte: ISODate('1990-01-01T00:00:00.000Z'),
+   $lte: ISODate('1990-12-12T00:00:00.000Z')
+  },
+  'address.state': 'UT',
+  policies: {
+   $elemMatch: {
+    policyType: 'life',
+    'insured_person.smoking': true
+   }
+  }
+ },{
+  _id: 0,
+  firstname: 1,
+  lastname: 1,
+  dob: 1
+ }
+)
+
+
+
+db.customersIndexed.find (
+{
+  gender: 'Female',
+  dob: {
+   $gte: ISODate('1990-01-01T00:00:00.000Z'),
+   $lte: ISODate('1990-12-12T00:00:00.000Z')
+  },
+  'address.state': 'UT',
+  policies: {
+   $elemMatch: {
+    policyType: 'life',
+    'insured_person.smoking': true
+   }
+  }
+ },{
+  _id: 0,
+  firstname: 1,
+  lastname: 1,
+  dob: 1
+ }
+)
